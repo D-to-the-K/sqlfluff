@@ -234,9 +234,8 @@ class Rule_RF06(BaseRule):
         """Called first time rule is evaluated to fetch & cache the policy."""
         ignore_words_config: str = str(getattr(self, "ignore_words"))
         if ignore_words_config and ignore_words_config != "None":
-            self.ignore_words_list = self.split_comma_separated_string(
-                ignore_words_config.lower()
-            )
+            words_list = self.split_comma_separated_string(ignore_words_config)
+            self.ignore_words_list = list(map(str.lower, words_list))
         else:
             self.ignore_words_list = []
 

@@ -117,9 +117,8 @@ class Rule_RF04(BaseRule):
         # Use str() in case bools are passed which might otherwise be read as bool
         ignore_words_config = str(getattr(self, "ignore_words"))
         if ignore_words_config and ignore_words_config != "None":
-            self.ignore_words_list = self.split_comma_separated_string(
-                ignore_words_config.lower()
-            )
+            words_list = self.split_comma_separated_string(ignore_words_config)
+            self.ignore_words_list = list(map(str.lower, words_list))
         else:
             self.ignore_words_list = []
 
