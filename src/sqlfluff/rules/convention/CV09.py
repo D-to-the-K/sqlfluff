@@ -107,7 +107,7 @@ class Rule_CV09(BaseRule):
         blocked_words_config = getattr(self, "blocked_words")
         if blocked_words_config:
             words_list = self.split_comma_separated_string(blocked_words_config)
-            self.blocked_words_list = list(map(str.upper, words_list))
+            self.blocked_words_list = [str(word).lower() for word in words_list]
         else:  # pragma: no cover
             # Shouldn't get here as we exit early if no block list
             self.blocked_words_list = []
