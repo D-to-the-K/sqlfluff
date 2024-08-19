@@ -104,10 +104,13 @@ class Rule_CV09(BaseRule):
 
     def _init_blocked_words(self) -> List[str]:
         """Called first time rule is evaluated to fetch & cache the blocked_words."""
+        # Use str() in case bools are passed which might otherwise be read as bool
         blocked_words_config = getattr(self, "blocked_words")
-        if blocked_words_config:
+        if isinstance(blocked_words_config, bool):
+            blocked_words_config = str(blocked_words_config).upper()
+        elif blocked_words_config:
             words_list = self.split_comma_separated_string(blocked_words_config)
-            self.blocked_words_list = [str(word).lower() for word in words_list]
+            self.blocked_words_list = [str(word).upper() for word in words_list]
         else:  # pragma: no cover
             # Shouldn't get here as we exit early if no block list
             self.blocked_words_list = []

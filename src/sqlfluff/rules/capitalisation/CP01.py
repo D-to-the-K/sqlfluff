@@ -288,8 +288,8 @@ class Rule_CP01(BaseRule):
         # Use str() as CP04 uses bools which might otherwise be read as bool
         ignore_words_config = getattr(self, "ignore_words")
         if isinstance(ignore_words_config, bool):
-            ignore_words_config = str(ignore_words_config)
-        if ignore_words_config and ignore_words_config != "None":
+            ignore_words_config = str(ignore_words_config).lower()
+        elif ignore_words_config and ignore_words_config != "None":
             words_list = self.split_comma_separated_string(ignore_words_config)
             self.ignore_words_list = [str(word).lower() for word in words_list]
         else:
